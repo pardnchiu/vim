@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # 檢查是否提供了備份目錄參數
 if [ $# -eq 1 ]; then
-    BACKUP_DIR="$1"
+    BACKUP_DIR="vim_backup/$1"
     # 檢查提供的路徑是否存在
     if [ ! -d "$BACKUP_DIR" ]; then
         echo "錯誤: 指定的備份目錄 '$BACKUP_DIR' 不存在"
