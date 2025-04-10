@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'      " 文件樹
 Plug 'vim-scripts/TagHighlight' " 可選：語法標註
 Plug 'morhetz/gruvbox' " 安裝 gruvbox
-Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
@@ -15,6 +14,19 @@ nnoremap ;l <C-w>l
 nnoremap ;k <C-w>k
 nnoremap ;j <C-w>j
 nnoremap ;w :w<CR>
+nnoremap ;s :split<CR>
+nnoremap ;v :vsplit<CR>
+
+" 在終端模式下使用 ; 加方向進行視窗切換
+tnoremap ;h <C-\><C-n><C-w>h
+tnoremap ;j <C-\><C-n><C-w>j
+tnoremap ;k <C-\><C-n><C-w>k
+tnoremap ;l <C-\><C-n><C-w>l
+
+" 確保新分割出現在底部
+set splitbelow
+" 創建5行高的終端快捷鍵
+nnoremap ;t :terminal<CR>
 
 " NERDTree 和普通文檔區域都能夠通用的 ;q 快捷鍵映射
 nnoremap ;q :call CloseBufferOrNERDTree()<CR>
