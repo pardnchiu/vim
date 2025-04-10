@@ -1,0 +1,9 @@
+YouCompleteMe 插件存在於配置中
+安裝命令提示: cd ~/.vim/plugged/YouCompleteMe && python3 install.py --all
+
+已安裝的補全器:
+total 16
+drwxr-xr-x   4 pardn  staff   128 Apr 10 08:57 .
+drwxr-xr-x  30 pardn  staff   960 Apr 10 08:57 ..
+-rw-r--r--@  1 pardn  staff  6148 Apr 10 08:57 .DS_Store
+drwxr-xr-x  41 pardn  staff  1312 Apr 10 08:57 ycmd

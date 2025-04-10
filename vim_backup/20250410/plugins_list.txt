@@ -1,0 +1,4 @@
+Plug 'preservim/nerdtree'      " 文件樹
+Plug 'vim-scripts/TagHighlight' " 可選：語法標註
+Plug 'morhetz/gruvbox' " 安裝 gruvbox
+Plug 'ycm-core/YouCompleteMe'
