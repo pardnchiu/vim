@@ -26,28 +26,12 @@ else
     echo "警告: 找不到 .vimrc 文件"
 fi
 
-# 備份整個 .vim 目錄
+# 備份整個 .vim 目錄，排除 .vim/plugged
 if [ -d "$HOME/.vim" ]; then
-    cp -r "$HOME/.vim" "$BACKUP_FULL_PATH/vim"
-    echo "已備份 .vim 目錄"
+    rsync -av --exclude "plugged" "$HOME/.vim/" "$BACKUP_FULL_PATH/vim/"
+    echo "已備份 .vim 目錄（排除 plugged 子目錄）"
 else
     echo "警告: 找不到 .vim 目錄"
-fi
-
-# 創建一個文件記錄 YouCompleteMe 的配置情況
-if [ -d "$HOME/.vim/plugged/YouCompleteMe" ]; then
-    echo "檢測到 YouCompleteMe 插件，記錄其狀態"
-    echo "YouCompleteMe 插件存在於配置中" > "$BACKUP_FULL_PATH/ycm_info.txt"
-    
-    # 記錄已安裝的補全器
-    echo "安裝命令提示: cd ~/.vim/plugged/YouCompleteMe && python3 install.py --all" >> "$BACKUP_FULL_PATH/ycm_info.txt"
-    echo "" >> "$BACKUP_FULL_PATH/ycm_info.txt"
-    
-    # 如果有 third_party 目錄，記錄其中的補全器
-    if [ -d "$HOME/.vim/plugged/YouCompleteMe/third_party" ]; then
-        echo "已安裝的補全器:" >> "$BACKUP_FULL_PATH/ycm_info.txt"
-        ls -la "$HOME/.vim/plugged/YouCompleteMe/third_party" >> "$BACKUP_FULL_PATH/ycm_info.txt"
-    fi
 fi
 
 # 記錄使用的插件

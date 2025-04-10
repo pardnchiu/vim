@@ -79,20 +79,6 @@ cp -r "$VIM_DIR/"* "$HOME/.vim/" 2>/dev/null
 cp -r "$VIM_DIR/."* "$HOME/.vim/" 2>/dev/null
 echo "已還原 .vim 目錄"
 
-# # 檢查 YouCompleteMe 是否存在
-# if [ -d "$HOME/.vim/plugged/YouCompleteMe" ]; then
-#     echo "檢測到 YouCompleteMe 插件，正在使用 --all 選項重新編譯..."
-#     cd "$HOME/.vim/plugged/YouCompleteMe" || exit
-#     python3 install.py --all
-    
-#     if [ $? -eq 0 ]; then
-#         echo "YouCompleteMe 編譯成功"
-#     else
-#         echo "YouCompleteMe 編譯失敗，請手動檢查"
-#         echo "可能需要手動運行: cd $HOME/.vim/plugged/YouCompleteMe && python3 install.py --all"
-#     fi
-# fi
-
 # 檢查是否需要安裝插件
 if [ -f "$HOME/.vimrc" ]; then
     if grep -q "plug#begin" "$HOME/.vimrc"; then
