@@ -1,9 +1,9 @@
 " 使用 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
 
-Plug 'preservim/nerdtree'      " 文件樹
+Plug 'preservim/nerdtree'       " 文件樹
 Plug 'vim-scripts/TagHighlight' " 可選：語法標註
-Plug 'morhetz/gruvbox' " 安裝 gruvbox
+Plug 'morhetz/gruvbox'          " 安裝 gruvbox
 
 call plug#end()
 
@@ -23,23 +23,33 @@ tnoremap ;j <C-\><C-n><C-w>j
 tnoremap ;k <C-\><C-n><C-w>k
 tnoremap ;l <C-\><C-n><C-w>l
 
+set number
+set relativenumber
+
 " 確保新分割出現在底部
 set splitbelow
 " 創建5行高的終端快捷鍵
 nnoremap ;t :terminal<CR>
 
-" NERDTree 和普通文檔區域都能夠通用的 ;q 快捷鍵映射
-nnoremap ;q :call CloseBufferOrNERDTree()<CR>
+" 添加刷新 NERDTree 的快捷鍵
+nnoremap ;r :NERDTreeRefreshRoot<CR>
 
-" 定義函數來關閉 NERDTree 或當前文檔
-function! CloseBufferOrNERDTree()
-  " 檢查當前緩衝區的 filetype 是否為 nerdtree
-  if &filetype == 'nerdtree'
-    " 如果是 NERDTree，則關閉 NERDTree
-    NERDTreeToggle
+" 在 NERDTree 中使用 ;c 改變工作目錄並展開資料夾
+autocmd FileType nerdtree nnoremap <buffer> ;c :call NERDTreeCDAndOpen()<CR>
+
+" 在 NERDTree 中使用 CD (Shift+cd) 改變工作目錄並展開資料夾
+autocmd FileType nerdtree nnoremap <buffer> CD :call NERDTreeCDAndOpen()<CR>
+
+function! NERDTreeCDAndOpen()
+  let node = g:NERDTreeFileNode.GetSelected()
+  if node.path.isDirectory
+    " 改變工作目錄
+    call nerdtree#ui_glue#chDirIfOptionSet(node.path.str())
+    " 打開目錄
+    call node.open()
+    echo "Changed directory to: " . node.path.str() . " and opened folder"
   else
-    " 否則，關閉當前文檔
-    quit
+    echo "Not a directory"
   endif
 endfunction
 
