@@ -1,0 +1,5 @@
+Plug 'preservim/nerdtree'       " 文件樹
+Plug 'vim-scripts/TagHighlight' " 可選：語法標註
+Plug 'morhetz/gruvbox'          " 安裝 gruvbox
+Plug 'mhinz/vim-startify'       " 啟動頁面
+Plug 'github/copilot.vim'       " 新增 Copilot
