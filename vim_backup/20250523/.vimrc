@@ -33,6 +33,14 @@ nnoremap ;r :NERDTreeRefreshRoot<CR> " 刷新 NERDTree 根目錄
 nnoremap ;f :NERDTreeFind<CR>        " 在 NERDTree 中找到當前檔案
 nnoremap ;n :NERDTreeToggle<CR>      " 切換 NERDTree 檔案樹
 
+" 設置 Vim 的行為
+set directory=~/.vim/swap//
+
+" 自動建立目錄
+if !isdirectory($HOME."/.vim/swap")
+    call mkdir($HOME."/.vim/swap", "p", 0700)
+endif
+
 set number                        " 顯示行號
 set relativenumber                " 顯示相對行號
 set splitbelow                    " 新分割視窗預設在下方
@@ -67,8 +75,8 @@ set noerrorbells       " 關閉錯誤提示音
 set visualbell         " 使用視覺提示取代聲音
 set t_vb=              " 禁用終端響鈴
 
-" 顯示隱藏檔案
-let NERDTreeShowHidden=1
+set showcmd            " 顯示命令行
+let NERDTreeShowHidden=1 " 顯示隱藏檔案
 let g:NERDTreeIgnore = ["\.svn$", "\.DS_Store", "node_modules", "vendor", "\.vscode", ".Trash"]
 
 " 自定義啟動頁面標題
@@ -147,8 +155,10 @@ augroup NERDTreeStartify
     autocmd!
     autocmd BufEnter *
         \ if winnr('$') == 1 && getbufvar(winbufnr(0), '&filetype') ==# 'nerdtree'
-        \ | Startify
-        \ | endif
+        \ |   Startify       
+        \ |   NERDTree       
+        \ |   wincmd w 
+	\ | endif
 augroup END
 
 " 在 NERDTree 視窗時 ;q 直接關閉 Vim
