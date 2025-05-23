@@ -3,18 +3,19 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'  " 狀態列
 Plug 'preservim/nerdtree'       " 文件樹
-Plug 'mileszs/ack.vim'		" 搜尋工具
-Plug 'vim-scripts/TagHighlight' " 可選：語法標註
-Plug 'morhetz/gruvbox'          " 安裝 gruvbox
-Plug 'mhinz/vim-startify'       " 啟動頁面
-Plug 'github/copilot.vim'       " 新增 Copilot
-Plug 'tpope/vim-fugitive'	" Git 整合
-Plug 'airblade/vim-gitgutter'	" Git 狀態顯示
+Plug 'preservim/nerdcommenter'  " 註解工具
+Plug 'mileszs/ack.vim'		      " 搜尋工具
+Plug 'sheerun/vim-polyglot'     " syntax support
+Plug 'tpope/vim-fugitive'	      " Git 整合
+Plug 'airblade/vim-gitgutter'	  " Git 狀態顯示
+Plug 'morhetz/gruvbox'          " Options: theme gruvbox
+Plug 'mhinz/vim-startify'       " Options: startify
+Plug 'github/copilot.vim'       " Options: copilot
 
 call plug#end()
 
 " PowerVim 快捷鍵
-nnoremap <Space> <C-w>W		  " 切換分割視窗
+nnoremap ;<Space> <C-w>W          " 切換分割視窗
 nnoremap ;h <C-w>h                " 移動到左邊分割視窗
 nnoremap ;l <C-w>l                " 移動到右邊分割視窗
 nnoremap ;k <C-w>k                " 移動到上方分割視窗
@@ -36,11 +37,14 @@ nnoremap ;n :NERDTreeToggle<CR>      " 切換 NERDTree 檔案樹
 " 設置 Vim 的行為
 set directory=~/.vim/swap//
 
+let mapleader = " "
+
 " 自動建立目錄
 if !isdirectory($HOME."/.vim/swap")
     call mkdir($HOME."/.vim/swap", "p", 0700)
 endif
 
+set synmaxcol=200                 " 語法高亮最大列數
 set number                        " 顯示行號
 set relativenumber                " 顯示相對行號
 set splitbelow                    " 新分割視窗預設在下方
