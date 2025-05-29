@@ -1,16 +1,17 @@
 " 使用 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-airline/vim-airline'  " 狀態列
-Plug 'preservim/nerdtree'       " 文件樹
-Plug 'preservim/nerdcommenter'  " 註解工具
-Plug 'mileszs/ack.vim'		      " 搜尋工具
-Plug 'sheerun/vim-polyglot'     " syntax support
-Plug 'tpope/vim-fugitive'	      " Git 整合
-Plug 'airblade/vim-gitgutter'	  " Git 狀態顯示
-Plug 'morhetz/gruvbox'          " Options: theme gruvbox
-Plug 'mhinz/vim-startify'       " Options: startify
-Plug 'github/copilot.vim'       " Options: copilot
+Plug 'sheerun/vim-polyglot'          " 語法高亮
+Plug 'vim-airline/vim-airline'       " 狀態列
+Plug 'preservim/nerdtree'            " 文件樹
+Plug 'preservim/nerdcommenter'       " 註解工具
+Plug 'mileszs/ack.vim'		           " 搜尋工具
+Plug 'vim-autoformat/vim-autoformat' " 可選: autoformat
+Plug 'tpope/vim-fugitive'	           " 可選: Git 支援
+Plug 'airblade/vim-gitgutter'	       " 可選: Git 標記
+Plug 'morhetz/gruvbox'               " 可選: 顏色主題
+Plug 'mhinz/vim-startify'            " 可選: 啟動頁面
+Plug 'github/copilot.vim'            " 可選: Copilot 支援
 
 call plug#end()
 
@@ -21,7 +22,8 @@ nnoremap ;l <C-w>l                " 移動到右邊分割視窗
 nnoremap ;k <C-w>k                " 移動到上方分割視窗
 nnoremap ;j <C-w>j                " 移動到下方分割視窗
 nnoremap ;w :w<CR>                " 快速儲存
-nnoremap ;q :q!<CR>               " 強制關閉當前視窗
+nnoremap ;q :q<CR>                " 關閉當前視窗
+nnoremap ;Q :q!<CR>               " 強制關閉當前視窗
 nnoremap ;s :split<CR>            " 垂直分割視窗
 nnoremap ;v :vsplit<CR>           " 水平分割視窗
 nnoremap ;g :Gdiff<CR>            " Git 命令
@@ -37,12 +39,25 @@ nnoremap ;n :NERDTreeToggle<CR>      " 切換 NERDTree 檔案樹
 " 設置 Vim 的行為
 set directory=~/.vim/swap//
 
-let mapleader = " "
-
 " 自動建立目錄
 if !isdirectory($HOME."/.vim/swap")
     call mkdir($HOME."/.vim/swap", "p", 0700)
 endif
+
+let mapleader = " " " 設置空格鍵為 leader 鍵
+
+syntax on
+filetype plugin indent on
+set number
+set expandtab
+set shiftwidth=2
+set tabstop=2
+
+" 自動格式化設定
+autocmd BufWritePre *.js,*.ts,*.php,*.go,*.html,*.css :Autoformat
+
+" 快捷鍵
+nnoremap <leader>f :Autoformat<CR>
 
 set synmaxcol=200                 " 語法高亮最大列數
 set number                        " 顯示行號
