@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# 設定備份目的地
+BACKUP_DIR="$(pwd)/vim_backup"
+BACKUP_FULL_PATH="$BACKUP_DIR"
+
+# 如果備份已存在，刪除舊的備份
+if [ -d "$BACKUP_FULL_PATH" ]; then
+    echo "發現備份，刪除舊備份"
+    rm -rf "$BACKUP_FULL_PATH"
+fi
+
+# 建立備份目的地
+mkdir -p "$BACKUP_FULL_PATH"
+
+# 備份 .vimrc 文件
+if [ -f "$HOME/.vimrc" ]; then
+    cp "$HOME/.vimrc" "$BACKUP_FULL_PATH/.vimrc"
+    echo "已備份 .vimrc 文件"
+else
+    echo "找不到 .vimrc 文件"
+fi
+
+# 備份 .vim 目錄，排除 .vim/plugged
+if [ -d "$HOME/.vim" ]; then
+    rsync -av --exclude "plugged" "$HOME/.vim/" "$BACKUP_FULL_PATH/vim/"
+    echo "已備份 .vim 目錄"
+else
+    echo "找不到 .vim 目錄"
+fi
+
+# 記錄使用的插件
+if [ -f "$HOME/.vimrc" ]; then
+    echo "正在記錄已使用的插件."
+    grep -i "Plug '" "$HOME/.vimrc" > "$BACKUP_FULL_PATH/plugins_list.txt" 2>/dev/null
+    grep -i 'Plug "' "$HOME/.vimrc" >> "$BACKUP_FULL_PATH/plugins_list.txt" 2>/dev/null
+    
+    if [ -s "$BACKUP_FULL_PATH/plugins_list.txt" ]; then
+        echo "已記錄插件清單到 plugins_list.txt"
+    else
+        echo "未找到使用 vim-plug 管理的插件，或格式不匹配"
+    fi
+fi
+
+
+echo "備份完成"

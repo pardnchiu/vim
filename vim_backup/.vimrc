@@ -87,8 +87,8 @@ function! NERDTreeCDAndOpen()
 endfunction
 
 syntax enable          " 啟用語法高亮
-set background=dark    " 設置背景為暗色（根據主題而定）
-colorscheme gruvbox    " 啟用 gruvbox 配色主題
+"set background=light   " 設置背景為暗色（根據主題而定）
+"colorscheme gruvbox    " 啟用 gruvbox 配色主題
 set t_Co=256           " 啟用 256 色彩支援
 set termguicolors      " 啟用真實顏色支援（24位元）
 set noerrorbells       " 關閉錯誤提示音
