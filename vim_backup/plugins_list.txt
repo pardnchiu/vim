@@ -6,6 +6,6 @@ Plug 'mileszs/ack.vim'		           " 搜尋工具
 Plug 'vim-autoformat/vim-autoformat' " 可選: autoformat
 Plug 'tpope/vim-fugitive'	           " 可選: Git 支援
 Plug 'airblade/vim-gitgutter'	       " 可選: Git 標記
-Plug 'morhetz/gruvbox'               " 可選: 顏色主題
 Plug 'mhinz/vim-startify'            " 可選: 啟動頁面
 Plug 'github/copilot.vim'            " 可選: Copilot 支援
+Plug 'cormacrelf/vim-colors-github'  " 可選: GitHub 主題

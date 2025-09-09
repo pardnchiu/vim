@@ -9,9 +9,9 @@ Plug 'mileszs/ack.vim'		           " 搜尋工具
 Plug 'vim-autoformat/vim-autoformat' " 可選: autoformat
 Plug 'tpope/vim-fugitive'	           " 可選: Git 支援
 Plug 'airblade/vim-gitgutter'	       " 可選: Git 標記
-Plug 'morhetz/gruvbox'               " 可選: 顏色主題
 Plug 'mhinz/vim-startify'            " 可選: 啟動頁面
 Plug 'github/copilot.vim'            " 可選: Copilot 支援
+Plug 'cormacrelf/vim-colors-github'  " 可選: GitHub 主題
 
 call plug#end()
 
@@ -88,7 +88,7 @@ endfunction
 
 syntax enable          " 啟用語法高亮
 "set background=light   " 設置背景為暗色（根據主題而定）
-"colorscheme gruvbox    " 啟用 gruvbox 配色主題
+colorscheme github     " 設置顏色主題為 GitHub 主題
 set t_Co=256           " 啟用 256 色彩支援
 set termguicolors      " 啟用真實顏色支援（24位元）
 set noerrorbells       " 關閉錯誤提示音
