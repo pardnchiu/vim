@@ -46,7 +46,7 @@ fi
 echo "備份完成"
 
 # 獲取當前日期
-CURRENT_DATE=$(date +"%Y-%m-%d")
+CURRENT_DATE=$(date +"%Y%m%d%H%M")
 
 git add .
 git commit -m "chore: backup-$CURRENT_DATE"
