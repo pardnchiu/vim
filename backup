@@ -49,5 +49,5 @@ echo "備份完成"
 CURRENT_DATE=$(date +"%Y%m%d%H%M")
 
 git add .
-git commit -m "chore: backup-$CURRENT_DATE"
+git commit -m "chore: config backup at $CURRENT_DATE"
 git push origin main
