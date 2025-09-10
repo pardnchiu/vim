@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 設定備份目的地
-BACKUP_DIR="$(pwd)/vim_backup"
+BACKUP_DIR="$(pwd)/.backup"
 BACKUP_FULL_PATH="$BACKUP_DIR"
 
 # 如果備份已存在，刪除舊的備份
