@@ -23,10 +23,10 @@ nnoremap ;k <C-w>k                " 移動到上方分割視窗
 nnoremap ;j <C-w>j                " 移動到下方分割視窗
 nnoremap ;w :w<CR>                " 快速儲存
 nnoremap ;q :q<CR>                " 關閉當前視窗
-nnoremap ;Q :q!<CR>               " 強制關閉當前視窗
+nnoremap ;Q :qa!<CR>              " 強制關閉當前視窗（不儲存）
 nnoremap ;s :split<CR>            " 垂直分割視窗
 nnoremap ;v :vsplit<CR>           " 水平分割視窗
-nnoremap ;g :Gdiff<CR>            " Git 命令
+nnoremap ;g :Gvdiff<CR>            " Git 命令
 " 設置更簡單的終端模式退出按鍵
 tnoremap <Esc> <C-\><C-n>
 
@@ -94,15 +94,19 @@ set termguicolors           " 啟用真實顏色支援（24位元）
 set noerrorbells            " 關閉錯誤提示音
 set visualbell              " 使用視覺提示取代聲音
 set t_vb=                   " 禁用終端響鈴
-
-set showcmd            " 顯示命令行
-let NERDTreeShowHidden=1 " 顯示隱藏檔案
+set cursorline              " 高亮當前行
+set wildmenu                " 命令行自動補全增強
+set showcmd                 " 顯示命令行
+let NERDTreeShowHidden=0    " 顯示隱藏檔案
 let g:NERDTreeIgnore = ["\.svn$", "\.DS_Store", "node_modules", "vendor", "\.vscode", ".Trash"]
 
 " 自定義啟動頁面標題
 let g:startify_custom_header = [
+    \ '   由 pardnchiu 搭配的 Vim 配置',
+    \ '   Git: github.com/pardnchiu/vim',
+    \ '',
     \ '   快捷鍵指南',
-    \ '   ==================',
+    \ '   ===========================',
     \ '',
     \ '   窗口導航:',
     \ '     Space - 切換到分割視窗',
@@ -116,6 +120,10 @@ let g:startify_custom_header = [
     \ '   檔案操作:',
     \ '     ;w - 快速儲存',
     \ '     ;q - 強制關閉當前視窗',
+    \ '     ;Q - 強制關閉當前視窗（不儲存）',
+    \ '     ;g - 顯示檔案差異',
+    \ '',
+    \ '   其他:',
     \ '     ;t - 開啟終端機',
     \ '',
     \ '   NERDTree:',
@@ -133,7 +141,6 @@ let g:startify_custom_header = [
     \ '     R - 刷新當前目錄',
     \ '     m - 顯示檔案系統選單 (新增/刪除/移動)',
     \ '     ? - 切換說明文檔',
-    \ '',
     \ ]
 
 let g:startify_lists = [
@@ -149,7 +156,7 @@ let g:startify_bookmarks = [
 
 " 自定義腳注
 let g:startify_custom_footer = [
-    \ '   Happy coding!',
+    \ '   github.com/pardnchiu/vim!',
     \ ]
 
 " 確保 Startify 總是首先顯示
@@ -173,13 +180,19 @@ autocmd StdinReadPre * let s:std_in=1 " 標記是否從 stdin 讀取
 
 augroup NERDTreeStartify
     autocmd!
-    autocmd BufEnter *
-        \ if winnr('$') == 1 && getbufvar(winbufnr(0), '&filetype') ==# 'nerdtree'
-        \ |   Startify       
-        \ |   NERDTree       
-        \ |   wincmd w 
-	\ | endif
+    autocmd BufEnter,BufWinLeave *
+        \ if winnr('$') <= 2
+        \ |   call timer_start(100, {-> CheckAndOpenStartify()})
+        \ | endif
 augroup END
+
+function! CheckAndOpenStartify()
+    if winnr('$') == 1 && getbufvar(winbufnr(0), '&filetype') ==# 'nerdtree'
+        Startify
+        NERDTree
+        wincmd w
+    endif
+endfunction
 
 " 在 NERDTree 視窗時 ;q 直接關閉 Vim
 autocmd FileType nerdtree nnoremap <buffer> ;q :qa!<CR>
