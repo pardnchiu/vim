@@ -22,8 +22,10 @@ nnoremap ;l <C-w>l                " 移動到右邊分割視窗
 nnoremap ;k <C-w>k                " 移動到上方分割視窗
 nnoremap ;j <C-w>j                " 移動到下方分割視窗
 nnoremap ;w :w<CR>                " 快速儲存
-nnoremap ;q :q<CR>                " 關閉當前視窗
-nnoremap ;Q :qa!<CR>              " 強制關閉當前視窗（不儲存）
+nnoremap ;x :wq<CR>               " 存檔 + 關閉當前視窗
+nnoremap ;X :wqa<CR>              " 存檔 + 關閉全部視窗
+nnoremap ;q :q!<CR>               " 強制關閉當前視窗（不儲存）
+nnoremap ;Q :qa!<CR>              " 強制關閉全部視窗（不儲存）
 nnoremap ;s :split<CR>            " 垂直分割視窗
 nnoremap ;v :vsplit<CR>           " 水平分割視窗
 nnoremap ;g :Gvdiff<CR>            " Git 命令
@@ -119,8 +121,10 @@ let g:startify_custom_header = [
     \ '',
     \ '   檔案操作:',
     \ '     ;w - 快速儲存',
-    \ '     ;q - 強制關閉當前視窗',
-    \ '     ;Q - 強制關閉當前視窗（不儲存）',
+    \ '     ;x - 儲存 + 關閉當前視窗',
+    \ '     ;X - 儲存 + 關閉全部視窗',
+    \ '     ;q - 強制關閉當前視窗（不儲存）',
+    \ '     ;Q - 強制關閉全部視窗（不儲存）',
     \ '     ;g - 顯示檔案差異',
     \ '',
     \ '   其他:',
