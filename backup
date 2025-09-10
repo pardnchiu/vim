@@ -50,3 +50,4 @@ CURRENT_DATE=$(date +"%Y-%m-%d")
 
 git add .
 git commit -m "chore: backup-$CURRENT_DATE"
+git push origin main
