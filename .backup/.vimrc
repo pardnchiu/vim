@@ -195,6 +195,8 @@ function! CheckAndOpenStartify()
     endif
 endfunction
 
+autocmd FileType startify nnoremap <buffer> q :qa<CR>
+
 " 在 NERDTree 視窗時 ;q 直接關閉 Vim
 autocmd FileType nerdtree nnoremap <buffer> ;q :qa!<CR>
 
