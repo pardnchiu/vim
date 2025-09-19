@@ -89,7 +89,10 @@ function! NERDTreeCDAndOpen()
 endfunction
 
 syntax enable               " 啟用語法高亮
-silent! colorscheme github  " 設置顏色主題為 GitHub 主題`
+"set background=light       " 設置背景為暗色（根據主題而定）
+silent! colorscheme github  " 設置顏色主題為 GitHub 主題
+set t_Co=256                " 啟用 256 色彩支援
+set termguicolors           " 啟用真實顏色支援（24位元）
 set noerrorbells            " 關閉錯誤提示音
 set visualbell              " 使用視覺提示取代聲音
 set t_vb=                   " 禁用終端響鈴
